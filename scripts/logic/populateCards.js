@@ -11,9 +11,6 @@ function populateCards(results) {
         message.textContent = `Oups ! Aucune recette ne correspond à votre recherche "${searchInput.value}"`;
         recipesContainer.appendChild(message);
         updateRecipeCount();
-        setTimeout(() => {
-            resetPageState();
-        }, 2000);
     } else {
         results.forEach((recipe, index) => {
             const card = createRecipeCard(recipe, index);

@@ -1,4 +1,4 @@
-// global sc0pe
+// global scope
 let results = [];
 let selectedFilters = [];
 let selectedItemClone;

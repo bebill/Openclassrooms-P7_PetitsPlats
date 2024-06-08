@@ -1,10 +1,9 @@
-
 const allAppliances = recipes.reduce((appliances, recipe) => {
   if (!appliances.includes(recipe.appliance.toLowerCase())) {
     appliances.push(recipe.appliance.toLowerCase());
   }
   return appliances;
-}, []);
+}, []).sort((a, b) => a.localeCompare(b));
 
 
 function getUniqueAppliances(results) {
@@ -13,13 +12,13 @@ function getUniqueAppliances(results) {
       appliances.push(recipe.appliance.toLowerCase());
     }
     return appliances;
-  }, []);
+  }, []).sort((a, b) => a.localeCompare(b));
   return uniqueAppliances;
 }
 
 
-const dd2ListContainer = document.querySelector('.dd2-list');
-dd2ListContainer.innerHTML = '';
+const dropdownApplianceListContainer = document.querySelector('.dropdown-appliance-list');
+dropdownApplianceListContainer.innerHTML = '';
 
 
 if (selectedContainer.children.length === 0 && results.length === 0) {
@@ -29,7 +28,7 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
     pElement.onclick = function () {
       selectItem(this);
     };
-    dd2ListContainer.appendChild(pElement);
+    dropdownApplianceListContainer.appendChild(pElement);
   });
 } else {
   const uniqueAppliances = getUniqueAppliances(results);
@@ -39,6 +38,6 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
     pElement.onclick = function () {
       selectItem(this);
     };
-    dd2ListContainer.appendChild(pElement);
+    dropdownApplianceListContainer.appendChild(pElement);
   });
 }

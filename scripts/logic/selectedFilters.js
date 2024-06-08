@@ -1,5 +1,5 @@
 function selectItem(selectedElement) {
-    const filterValue = selectedElement.textContent.toLowerCase(); 
+    const filterValue = selectedElement.textContent.toLowerCase();
     if (!selectedFilters.some(filter => filter.toLowerCase() === filterValue)) {
         selectedFilters.push(filterValue);
         searchByFilters(selectedFilters);
@@ -8,7 +8,7 @@ function selectItem(selectedElement) {
         if (selectedItemClone) {
             removeSelectedItem(selectedElement, selectedItemClone);
             setTimeout(function () {    // timeout to wait for the DOM to update 
-               searchByFilters(selectedFilters);
+                searchByFilters(selectedFilters);
             }, 0);
         }
     }
@@ -95,7 +95,7 @@ function removeSelectedItem(selectedElement, selectedItemClone) {
     }
     if (selectedFilters.length === 0) {
         searchInput.value = '';
-        resetPageState(); 
+        resetPageState();
     }
     selectedElement.classList.remove("selected");
     selectedElement.style.height = "";
@@ -120,7 +120,7 @@ function resetPageState() {
 
 
 function updateSelectedVisuals() {
-    const containers = [dd1ListContainer, dd2ListContainer, dd3ListContainer, selectedContainer];
+    const containers = [dropdownIngredientsListContainer, dropdownApplianceListContainer, dropdownUstensilsListContainer, selectedContainer];
 
     containers.forEach(container => {
         const allSelectedItems = container.querySelectorAll('[class*="selected"]');

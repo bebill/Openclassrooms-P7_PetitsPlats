@@ -1,5 +1,4 @@
-// reset&close the input with cross icon 
-
+// reset & close the input 
 const searchInput = document.getElementById("search-input");
 const searchClose = document.getElementById("search-close");
 
@@ -14,20 +13,20 @@ searchInput.addEventListener("input", function () {
 searchClose.addEventListener("click", function () {
     searchInput.value = "";
     searchClose.style.display = "none";
+    resetRecipes();
 });
 
 
-// dealing with absolute-positionned header background 
+// absolute position of header background 
 function setContainerHeight() {
     const backgroundImage = document.querySelector('.background-img');
     const containerHeader = document.querySelector('.container-header');
-  
+
     if (backgroundImage && containerHeader) {
-      const imageHeight = backgroundImage.clientHeight;
-      containerHeader.style.height = `${imageHeight}px`;
+        const imageHeight = backgroundImage.clientHeight;
+        containerHeader.style.height = `${imageHeight}px`;
     }
-  }
-  
-  document.addEventListener('DOMContentLoaded', setContainerHeight);
-  window.addEventListener('resize', setContainerHeight);
-  
+}
+
+document.addEventListener('DOMContentLoaded', setContainerHeight);
+window.addEventListener('resize', setContainerHeight);

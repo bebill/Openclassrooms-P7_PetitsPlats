@@ -7,7 +7,7 @@ const allIngredients = recipes.reduce((ingredients, recipe) => {
         }
     });
     return ingredients;
-}, []);
+}, []).sort((a, b) => a.ingredient.localeCompare(b.ingredient));
 
 function getUniqueIngredients(results) {
     const uniqueIngredients = results.reduce((ingredients, recipe) => {
@@ -18,16 +18,15 @@ function getUniqueIngredients(results) {
             }
         });
         return ingredients;
-    }, []);
+    }, []).sort((a, b) => a.localeCompare(b));
     return uniqueIngredients;
 }
 
 
-
-const dd1ListContainer = document.querySelector('.dd1-list');
+const dropdownIngredientsListContainer = document.querySelector('.dropdown-ingredients-list');
 const selectedContainer = document.getElementById('selectedContainer');
 
-dd1ListContainer.innerHTML = '';
+dropdownIngredientsListContainer.innerHTML = '';
 
 if (selectedContainer.children.length === 0 && results.length === 0) {
     allIngredients.forEach(ingredient => {
@@ -36,7 +35,7 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
         pElement.onclick = function () {
             selectItem(this);
         };
-        dd1ListContainer.appendChild(pElement);
+        dropdownIngredientsListContainer.appendChild(pElement);
     });
 } else {
     const uniqueIngredients = getUniqueIngredients(results);
@@ -46,6 +45,6 @@ if (selectedContainer.children.length === 0 && results.length === 0) {
         pElement.onclick = function () {
             selectItem(this);
         };
-        dd1ListContainer.appendChild(pElement);
+        dropdownIngredientsListContainer.appendChild(pElement);
     });
 }

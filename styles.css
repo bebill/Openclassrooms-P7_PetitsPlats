@@ -199,7 +199,8 @@ body {
     padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
     padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); */
+    grid-template-columns: repeat(3, 1fr);
     row-gap: clamp(7px, calc(4vw + 6px), 66px);
     column-gap: clamp(7px, calc(3vw + 6px), 48px);
     background: #EDEDED;
@@ -242,8 +243,7 @@ body {
     width: 100%;
     padding-left: 6.5%;
     padding-right: 6.5%;
-    height: 478px;
-    min-height: 478px;
+    height: 480px;
 }
 
 
@@ -260,7 +260,7 @@ body {
 
 .container-card-text h2 {
     color: #7A7A7A;
-    font-family: Manrope;
+    font-family: "Manrope";
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
@@ -276,18 +276,14 @@ body {
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
-    line-height: normal;
     overflow: hidden;
-    max-height: 76px;
+    text-overflow: ellipsis;
+    height: 80px;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
 }
 
-.recipe-description:hover {
-    max-height: 100%;
-}
-
-.recipe-description:hover~.description-container {
-    max-height: 100%;
-}
 
 .description-container {
     margin-bottom: 28px;
@@ -400,9 +396,9 @@ body {
 }
 
 
-.dropdown1,
-.dropdown2,
-.dropdown3 {
+.dropdown-ingredients,
+.dropdown-appliance,
+.dropdown-ustensils {
     width: 195px;
     flex-shrink: 0;
     border-radius: 11px;
@@ -417,9 +413,9 @@ body {
     position: relative;
 }
 
-.dropdown1.open,
-.dropdown2.open,
-.dropdown3.open {
+.dropdown-ingredients.open,
+.dropdown-appliance.open,
+.dropdown-ustensils.open {
     height: 315px;
     overflow-y: auto;
     z-index: 10;
@@ -427,9 +423,9 @@ body {
     position: relative;
 }
 
-#dropdownArrow1,
-#dropdownArrow2,
-#dropdownArrow3 {
+#dropdown-ingredients-arrow,
+#dropdown-appliance-arrow,
+#dropdown-ustensils-arrow {
     transition: transform 0.3s ease;
 }
 
@@ -437,15 +433,15 @@ body {
     transform: rotate(180deg);
 }
 
-.dropdown1::-webkit-scrollbar,
-.dropdown2::-webkit-scrollbar,
-.dropdown3::-webkit-scrollbar {
+.dropdown-ingredients::-webkit-scrollbar,
+.dropdown-appliance::-webkit-scrollbar,
+.dropdown-ustensils::-webkit-scrollbar {
     display: none;
 }
 
-.dd1-visiblepart,
-.dd2-visiblepart,
-.dd3-visiblepart {
+.dropdown-ingredients-visiblepart,
+.dropdown-appliance-visiblepart,
+.dropdown-ustensils-visiblepart {
     display: flex;
     justify-content: space-between;
     padding: 17px 16px;
@@ -458,9 +454,9 @@ body {
     z-index: 100;
 }
 
-.dd1-visiblepart h1,
-.dd2-visiblepart h1,
-.dd3-visiblepart h1 {
+.dropdown-ingredients-visiblepart h1,
+.dropdown-appliance-visiblepart h1,
+.dropdown-ustensils-visiblepart h1 {
     color: #1B1B1B;
     font-family: "Manrope", sans-serif;
     font-size: 16px;
@@ -476,9 +472,9 @@ body {
     transform: translateX(15px);
 }
 
-.dd1-inputcontainer,
-.dd2-inputcontainer,
-.dd3-inputcontainer {
+.dropdown-ingredients-inputcontainer,
+.dropdown-appliance-inputcontainer,
+.dropdown-ustensils-inputcontainer {
     position: relative;
     width: 163px;
     height: 36px;
@@ -489,9 +485,9 @@ body {
     background: #FFF;
 }
 
-.dd1-inputcontainer input[type="text"],
-.dd2-inputcontainer input[type="text"],
-.dd3-inputcontainer input[type="text"] {
+.dropdown-ingredients-inputcontainer input[type="text"],
+.dropdown-appliance-inputcontainer input[type="text"],
+.dropdown-ustensils-inputcontainer input[type="text"] {
     border: none;
     outline: none;
     width: 120px;
@@ -506,9 +502,9 @@ body {
     background: #FFF;
 }
 
-.dd1-list,
-.dd2-list,
-.dd3-list {
+.dropdown-ingredients-list,
+.dropdown-appliance-list,
+.dropdown-ustensils-list {
     display: flex;
     width: 163px;
     flex-direction: column;
@@ -524,9 +520,9 @@ body {
     row-gap: 13px;
 }
 
-.dd1-list p,
-.dd2-list p,
-.dd3-list p {
+.dropdown-ingredients-list p,
+.dropdown-appliance-list p,
+.dropdown-ustensils-list p {
     height: 19px;
     white-space: nowrap;
     overflow: hidden;
@@ -538,15 +534,15 @@ body {
     position: relative;
 }
 
-.dd1-list p:not(.selected):hover,
-.dd2-list p:not(.selected):hover,
-.dd3-list p:not(.selected):hover {
+.dropdown-ingredients-list p:not(.selected):hover,
+.dropdown-appliance-list p:not(.selected):hover,
+.dropdown-ustensils-list p:not(.selected):hover {
     overflow: visible;
 }
 
-.dd1-list p:not(.selected)::before,
-.dd2-list p:not(.selected)::before,
-.dd3-list p:not(.selected)::before {
+.dropdown-ingredients-list p:not(.selected)::before,
+.dropdown-appliance-list p:not(.selected)::before,
+.dropdown-ustensils-list p:not(.selected)::before {
     content: ""; 
     position: absolute;
     top: -10px; 
@@ -559,9 +555,9 @@ body {
     transition: opacity 0.1s linear; 
 }
 
-.dd1-list p:not(.selected):hover::before,
-.dd2-list p:not(.selected):hover::before,
-.dd3-list p:not(.selected):hover::before {
+.dropdown-ingredients-list p:not(.selected):hover::before,
+.dropdown-appliance-list p:not(.selected):hover::before,
+.dropdown-ustensils-list p:not(.selected):hover::before {
     opacity: 1; /* Make the pseudo-element visible on hover */
 }
 
@@ -583,7 +579,7 @@ body {
     border-radius: 10px;
     background: #FFD15B;
     color: #000;
-    font-family: Manrope;
+    font-family: "Manrope";
     font-size: 14px;
     font-style: normal;
     font-weight: 400;
@@ -593,16 +589,16 @@ body {
 
 .selected {
     color: #1B1B1B;
-font-family: Manrope;
-font-size: 14px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-flex-shrink: 0;
-background: #FFD15B;
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding-right: 10px;
+    font-family: "Manrope";
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    flex-shrink: 0;
+    background: #FFD15B;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 10px;
 }
 

@@ -25,32 +25,32 @@ function handleSearch() {
 /*  array method filters search */
 function searchByFilters(selectedFilters) {
     results = recipes.filter(recipe => {
-      return selectedFilters.every(filter => {
-        if (recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filter.toLowerCase()))) {
-          return true;
-        } else if (recipe.appliance.toLowerCase().includes(filter.toLowerCase())) {
-          return true;
-        } else if (recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(filter.toLowerCase()))) {
-          return true;
-        } else {
-          return false;
-        }
-      });
+        return selectedFilters.every(filter => {
+            if (recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(filter.toLowerCase()))) {
+                return true;
+            } else if (recipe.appliance.toLowerCase().includes(filter.toLowerCase())) {
+                return true;
+            } else if (recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(filter.toLowerCase()))) {
+                return true;
+            } else {
+                return false;
+            }
+        });
     });
     updateSearchResults(results);
     populateCards(results);
-  }
+}
 
 function updateSearchResults(results) {
     const uniqueIngredients = getUniqueIngredients(results);
     const uniqueAppliances = getUniqueAppliances(results);
     const uniqueUstensils = getUniqueUstensils(results);
 
-    updateDropdownOptions(1, uniqueIngredients, 'ingredient');
-    updateDropdownOptions(2, uniqueAppliances, 'appliance');
-    updateDropdownOptions(3, uniqueUstensils, 'ustensil');
+    updateDropdownOptions('ingredients', uniqueIngredients, 'ingredient');
+    updateDropdownOptions('appliance', uniqueAppliances, 'appliance');
+    updateDropdownOptions('ustensils', uniqueUstensils, 'ustensil');
 
-    const containers = [dd1ListContainer, dd2ListContainer, dd3ListContainer];
+    const containers = [dropdownIngredientsListContainer, dropdownApplianceListContainer, dropdownUstensilsListContainer];
 
     selectedFilters.forEach(filter => {
         const isInIngredients = uniqueIngredients.includes(filter);
@@ -83,10 +83,9 @@ function resetRecipes() {
     updateRecipeCount();
 }
 
-function updateDropdownOptions(dropdownNumber, options, property) {
-    const dropdownId = `dd${dropdownNumber}-list`;
+function updateDropdownOptions(dropdownFilter, options, property) {
+    const dropdownId = `dropdown-${dropdownFilter}-list`;
     const dropdown = document.getElementById(dropdownId);
-
     if (!dropdown) {
         console.error(`Dropdown with ID ${dropdownId} not found.`);
         return;
