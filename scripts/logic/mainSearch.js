@@ -87,7 +87,6 @@ function updateDropdownOptions(dropdownFilter, options, property) {
     const dropdownId = `dropdown-${dropdownFilter}-list`;
     const dropdown = document.getElementById(dropdownId);
     if (!dropdown) {
-        console.error(`Dropdown with ID ${dropdownId} not found.`);
         return;
     }
 

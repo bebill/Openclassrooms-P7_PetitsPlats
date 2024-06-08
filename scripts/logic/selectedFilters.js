@@ -13,11 +13,36 @@ function selectItem(selectedElement) {
         }
     }
     updateSelectedVisuals();
+    moveSelectedItemToTheTop(dropdownIngredientsListContainer);
+    moveSelectedItemToTheTop(dropdownApplianceListContainer);
+    moveSelectedItemToTheTop(dropdownUstensilsListContainer);
+    dropdownIngredientsInput.value = '';
+    dropdownApplianceInput.value = '';
+    dropdownUstensilsInput.value = '';
 }
+
+function moveSelectedItemToTheTop(container) {
+    const items = Array.from(container.children);
+    items.sort((a, b) => {
+        const isSelectedA = a.classList.contains('selected');
+        const isSelectedB = b.classList.contains('selected');
+        if (isSelectedA && !isSelectedB) {
+            return -1;
+        } else if (!isSelectedA && isSelectedB) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+    container.innerHTML = ''; // Effacer les éléments existants
+    items.forEach(item => {
+        container.appendChild(item);
+    });
+}
+
 
 function updateSelectedItemLayout(selectedElement) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
-    const svgDropdown = selectedElement.querySelector('svg');
 
     if (!selectedElement.classList.contains("selected")) {
         selectedElement.classList.add("selected");
@@ -36,14 +61,17 @@ function updateSelectedItemLayout(selectedElement) {
             selectedContainer.appendChild(selectedItemClone);
         }
     }
+    const svgDropdown = selectedElement.getElementsByTagName('svg')[0];
     if (!svgDropdown) {
         createDropdownSVG();
     }
-    if (!selectedItemClone.querySelector('svg')) {
-        createCloneSVG();
+    const svgRemove = selectedItemClone.getElementsByTagName('svg')[0];
+    if (!svgRemove) {
+        createRemoveSVG();
     }
 
-    // ------------------SVG IN THE DROPDOWN------------------------   
+    // ------------------SVG IN THE DROPDOWN------------------------ //
+    // arrow icon
     function createDropdownSVG() {
         var svgElement = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svgElement.setAttribute("xmlns", "http://www.w3.org/2000/svg");
@@ -64,8 +92,8 @@ function updateSelectedItemLayout(selectedElement) {
         svgElement.appendChild(pathElement);
         selectedElement.appendChild(svgElement);
     }
-    // clone svg
-    function createCloneSVG() {
+    // remove icon
+    function createRemoveSVG() {
         if (!selectedItemClone) {
             console.error("selectedItemClone is undefined");
         }
@@ -111,9 +139,9 @@ function removeSelectedItem(selectedElement, selectedItemClone) {
 
 
 function resetPageState() {
-    updateDropdownOptions(1, allIngredients, 'ingredient');
-    updateDropdownOptions(2, allAppliances, 'appliance');
-    updateDropdownOptions(3, allUstensils, 'ustensil');
+    updateDropdownOptions('ingredients', allIngredients, 'ingredient');
+    updateDropdownOptions('appliance', allAppliances, 'appliance');
+    updateDropdownOptions('ustensils', allUstensils, 'ustensil');
     populateCards(recipes);
     updateRecipeCount();
 }

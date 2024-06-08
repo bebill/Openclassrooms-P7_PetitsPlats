@@ -82,25 +82,9 @@ function createRecipeCard(recipe, index) {
     return card;
 }
 
-
-document.addEventListener('DOMContentLoaded', function () {
-    const recipeDescriptions = document.querySelectorAll('.recipe-description');
-    const containerCardTexts = document.querySelectorAll('.container-card-text');
-
-    recipeDescriptions.forEach((recipeDescription, index) => {
-        recipeDescription.addEventListener('mouseover', () => {
-            containerCardTexts[index].style.height = `100%`;
-        });
-
-        recipeDescription.addEventListener('mouseout', () => {
-            containerCardTexts[index].style.height = '478px';
-        });
-    });
-});
-
 function updateRecipeCount() {
     const recipeCountElement = document.getElementById('number-recipes');
-    const visibleRecipeCards = document.querySelectorAll('.recipe-container');
+    const visibleRecipeCards = document.getElementsByClassName('recipe-container');
     const numberOfRecipes = visibleRecipeCards.length;
     let recipeText;
 

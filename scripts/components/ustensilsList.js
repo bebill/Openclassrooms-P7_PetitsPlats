@@ -21,7 +21,7 @@ function getUniqueUstensils(results) {
     return uniqueUstensils;
 }
 
-const dropdownUstensilsListContainer = document.querySelector('.dropdown-ustensils-list');
+const dropdownUstensilsListContainer = document.getElementById('dropdown-ustensils-list');
 dropdownUstensilsListContainer.innerHTML = '';
 
 if (selectedContainer.children.length === 0 && results.length === 0) {

@@ -9,6 +9,7 @@ const allIngredients = recipes.reduce((ingredients, recipe) => {
     return ingredients;
 }, []).sort((a, b) => a.ingredient.localeCompare(b.ingredient));
 
+
 function getUniqueIngredients(results) {
     const uniqueIngredients = results.reduce((ingredients, recipe) => {
         recipe.ingredients.forEach(ingredient => {
@@ -23,7 +24,7 @@ function getUniqueIngredients(results) {
 }
 
 
-const dropdownIngredientsListContainer = document.querySelector('.dropdown-ingredients-list');
+const dropdownIngredientsListContainer = document.getElementById('dropdown-ingredients-list');
 const selectedContainer = document.getElementById('selectedContainer');
 
 dropdownIngredientsListContainer.innerHTML = '';

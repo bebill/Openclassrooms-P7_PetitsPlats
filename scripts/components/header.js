@@ -19,8 +19,8 @@ searchClose.addEventListener("click", function () {
 
 // absolute position of header background 
 function setContainerHeight() {
-    const backgroundImage = document.querySelector('.background-img');
-    const containerHeader = document.querySelector('.container-header');
+    const backgroundImage = document.getElementById('background-img');
+    const containerHeader = document.getElementById('container-header');
 
     if (backgroundImage && containerHeader) {
         const imageHeight = backgroundImage.clientHeight;
