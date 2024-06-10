@@ -3,41 +3,47 @@ function selectItem(selectedElement) {
     if (!selectedFilters.some(filter => filter.toLowerCase() === filterValue)) {
         selectedFilters.push(filterValue);
         searchByFilters(selectedFilters);
+        selectedElement.classList.add("selected");
     } else {
         const selectedItemClone = document.querySelector(`.selected-item[data-filter="${filterValue}"]`);
         if (selectedItemClone) {
             removeSelectedItem(selectedElement, selectedItemClone);
-            setTimeout(function () {    // timeout to wait for the DOM to update 
-                searchByFilters(selectedFilters);
-            }, 0);
         }
     }
-    updateSelectedVisuals();
+
     moveSelectedItemToTheTop(dropdownIngredientsListContainer);
     moveSelectedItemToTheTop(dropdownApplianceListContainer);
     moveSelectedItemToTheTop(dropdownUstensilsListContainer);
-    dropdownIngredientsInput.value = '';
-    dropdownApplianceInput.value = '';
-    dropdownUstensilsInput.value = '';
+    updateSelectedVisuals();
 }
 
-function moveSelectedItemToTheTop(container) {
-    const items = Array.from(container.children);
-    items.sort((a, b) => {
-        const isSelectedA = a.classList.contains('selected');
-        const isSelectedB = b.classList.contains('selected');
-        if (isSelectedA && !isSelectedB) {
-            return -1;
-        } else if (!isSelectedA && isSelectedB) {
-            return 1;
-        } else {
-            return 0;
-        }
-    });
-    container.innerHTML = ''; // Effacer les éléments existants
-    items.forEach(item => {
-        container.appendChild(item);
-    });
+function removeSelectedItem(selectedElement, selectedItemClone) {
+    const filterValue = selectedElement.textContent.trim().toLowerCase();
+
+    const index = selectedFilters.indexOf(filterValue);
+    if (index !== -1) {
+        selectedFilters.splice(index, 1);
+    }
+
+    selectedElement.classList.remove("selected");
+    selectedElement.style.height = "";
+    selectedElement.querySelector('svg')?.remove();
+
+    if (document.body.contains(selectedItemClone)) {
+        selectedItemClone.querySelector('svg')?.remove();
+        selectedItemClone.remove();
+    }
+
+    if (selectedFilters.length === 0) {
+        resetPageState();
+    } else {
+        searchByFilters(selectedFilters);
+    }
+
+    moveSelectedItemToTheTop(dropdownIngredientsListContainer);
+    moveSelectedItemToTheTop(dropdownApplianceListContainer);
+    moveSelectedItemToTheTop(dropdownUstensilsListContainer);
+    updateSelectedVisuals();
 }
 
 
@@ -121,20 +127,26 @@ function removeSelectedItem(selectedElement, selectedItemClone) {
     if (index !== -1) {
         selectedFilters.splice(index, 1);
     }
-    if (selectedFilters.length === 0) {
-        searchInput.value = '';
-        resetPageState();
-    }
+
     selectedElement.classList.remove("selected");
     selectedElement.style.height = "";
     selectedElement.querySelector('svg')?.remove();
 
     if (document.body.contains(selectedItemClone)) {
-        setTimeout(function () {    // timeout to wait for the DOM to update 
-            selectedItemClone.querySelector('svg')?.remove();
-            selectedItemClone.remove();
-        }, 0);
+        selectedItemClone.querySelector('svg')?.remove();
+        selectedItemClone.remove();
     }
+
+    if (selectedFilters.length === 0) {
+        resetPageState();
+    } else {
+        searchByFilters(selectedFilters);
+    }
+
+    moveSelectedItemToTheTop(dropdownIngredientsListContainer);
+    moveSelectedItemToTheTop(dropdownApplianceListContainer);
+    moveSelectedItemToTheTop(dropdownUstensilsListContainer);
+    updateSelectedVisuals();
 }
 
 
@@ -147,17 +159,34 @@ function resetPageState() {
 }
 
 
+function moveSelectedItemToTheTop(container) {
+    const selectedItems = Array.from(container.children).filter(item => item.classList.contains('selected'));
+    const unselectedItems = Array.from(container.children).filter(item => !item.classList.contains('selected'));
+    console.log("Selected Items move to top:", selectedItems);
+    console.log("Unselected Items move to top:", unselectedItems);
+    // Effacer les éléments existants
+    container.innerHTML = '';
+
+    // Ajouter d'abord les éléments sélectionnés
+    selectedItems.forEach(item => container.appendChild(item));
+
+    // Puis ajouter les éléments non sélectionnés
+    unselectedItems.forEach(item => container.appendChild(item));
+}
+
 function updateSelectedVisuals() {
     const containers = [dropdownIngredientsListContainer, dropdownApplianceListContainer, dropdownUstensilsListContainer, selectedContainer];
 
     containers.forEach(container => {
         const allSelectedItems = container.querySelectorAll('[class*="selected"]');
-
+        console.log('Selected items:', allSelectedItems);
         allSelectedItems.forEach(selectedItem => {
             const filterValue = selectedItem.getAttribute('data-filter');
             const selectedItemText = selectedItem.textContent.trim().toLowerCase();
-
+            console.log('Filter value:', filterValue);
+            console.log('Selected item text:', selectedItemText);
             if (!selectedFilters.includes(filterValue) && !selectedFilters.includes(selectedItemText)) {
+                console.log('Removing item:', selectedItem);
                 removeSelectedItem(selectedItem, null, null);
             }
         });
