@@ -170,6 +170,7 @@ body {
     position: absolute;
     right: 85px;
     display: none;
+    cursor: pointer;
 }
 
 .research-field input {

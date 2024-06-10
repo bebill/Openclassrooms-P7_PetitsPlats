@@ -81,6 +81,7 @@ function findDropdownElementByText(text, containers) {
 function resetRecipes() {
     populateCards(recipes);
     updateRecipeCount();
+    updateSearchResults(recipes);
 }
 
 // Effacer le contenu des inputs de recherche
