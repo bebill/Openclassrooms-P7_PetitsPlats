@@ -23,11 +23,8 @@ function getUniqueIngredients(results) {
     return uniqueIngredients;
 }
 
-
-const dropdownIngredientsListContainer = document.getElementById('dropdown-ingredients-list');
-const selectedContainer = document.getElementById('selectedContainer');
-
 dropdownIngredientsListContainer.innerHTML = '';
+
 
 if (selectedContainer.children.length === 0 && results.length === 0) {
     allIngredients.forEach(ingredient => {

@@ -17,7 +17,6 @@ function getUniqueAppliances(results) {
 }
 
 
-const dropdownApplianceListContainer = document.getElementById('dropdown-appliance-list');
 dropdownApplianceListContainer.innerHTML = '';
 
 

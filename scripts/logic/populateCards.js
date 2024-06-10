@@ -8,7 +8,8 @@ function populateCards(results) {
     recipesContainer.innerHTML = '';
     if (results.length === 0) {
         const message = document.createElement('p');
-        message.textContent = `Oups ! Aucune recette ne correspond à votre recherche "${searchInput.value}"`;
+        message.textContent = `Aucune recette ne contient "${searchInput.value}",vous pouvez chercher «
+        tarte aux pommes », « poisson », etc.`;
         recipesContainer.appendChild(message);
         updateRecipeCount();
     } else {
