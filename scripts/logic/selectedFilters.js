@@ -46,7 +46,6 @@ function removeSelectedItem(selectedElement, selectedItemClone) {
     updateSelectedVisuals();
 }
 
-
 function updateSelectedItemLayout(selectedElement) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
 
@@ -120,36 +119,6 @@ function updateSelectedItemLayout(selectedElement) {
     }
 }
 
-function removeSelectedItem(selectedElement, selectedItemClone) {
-    const filterValue = selectedElement.textContent.trim().toLowerCase();
-
-    const index = selectedFilters.indexOf(filterValue);
-    if (index !== -1) {
-        selectedFilters.splice(index, 1);
-    }
-
-    selectedElement.classList.remove("selected");
-    selectedElement.style.height = "";
-    selectedElement.querySelector('svg')?.remove();
-
-    if (document.body.contains(selectedItemClone)) {
-        selectedItemClone.querySelector('svg')?.remove();
-        selectedItemClone.remove();
-    }
-
-    if (selectedFilters.length === 0) {
-        resetPageState();
-    } else {
-        searchByFilters(selectedFilters);
-    }
-
-    moveSelectedItemToTheTop(dropdownIngredientsListContainer);
-    moveSelectedItemToTheTop(dropdownApplianceListContainer);
-    moveSelectedItemToTheTop(dropdownUstensilsListContainer);
-    updateSelectedVisuals();
-}
-
-
 function resetPageState() {
     updateDropdownOptions('ingredients', allIngredients, 'ingredient');
     updateDropdownOptions('appliance', allAppliances, 'appliance');
@@ -157,7 +126,6 @@ function resetPageState() {
     populateCards(recipes);
     updateRecipeCount();
 }
-
 
 function moveSelectedItemToTheTop(container) {
     const selectedItems = Array.from(container.children).filter(item => item.classList.contains('selected'));
