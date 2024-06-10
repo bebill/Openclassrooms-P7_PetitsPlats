@@ -64,7 +64,7 @@ textarea {
     outline: none;
 }
 
-/* _______________________________________ END OF CSS RESET ____________________________________ */
+/* _____________________________ END OF CSS RESET _____________________________ */
 
 html {
     width: 100%;
@@ -128,7 +128,6 @@ body {
     gap: 28px;
     padding-top: clamp(65px, calc(18vw - 65px), 227px);
 }
-
 
 .search-icon {
     width: 51px;
@@ -196,7 +195,7 @@ body {
     outline: none;
 }
 
-/* _______________________________________ CARDS _________________________________________ */
+/* _____________________________ CARDS _____________________________ */
 
 .cards-container {
     padding-top: 22px;
@@ -283,7 +282,6 @@ body {
     -webkit-box-orient: vertical;
 }
 
-
 .description-container {
     margin-bottom: 28px;
 }
@@ -330,7 +328,7 @@ body {
     position: relative;
 }
 
-/*________________________________________ DROPDOWNS _____________________________ */
+/* _____________________________ DROPDOWNS _____________________________ */
 
 
 .dropdown-container {
@@ -379,7 +377,11 @@ body {
     }
 }
 
-
+#dropdown-ingredients::-webkit-scrollbar,
+#dropdown-appliance::-webkit-scrollbar,
+#dropdown-ustensils::-webkit-scrollbar {
+    display: none;
+}
 
 #dropdown-ingredients,
 #dropdown-appliance,
@@ -396,6 +398,8 @@ body {
     overflow-y: hidden;
     transition: height 0.1s linear;
     position: relative;
+    cursor:pointer;
+
 }
 
 #dropdown-ingredients.open,
@@ -418,11 +422,6 @@ body {
     transform: rotate(180deg);
 }
 
-#dropdown-ingredients::-webkit-scrollbar,
-#dropdown-appliance::-webkit-scrollbar,
-#dropdown-ustensils::-webkit-scrollbar {
-    display: none;
-}
 
 #dropdown-ingredients-visiblepart,
 #dropdown-appliance-visiblepart,
@@ -457,6 +456,24 @@ body {
     transform: translateX(15px);
 }
 
+#dropdown-ingredients-clear,
+#dropdown-appliance-clear,
+#dropdown-ustensils-clear  {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #7A7A7A;
+    transform: translateX(-20px);
+}
+
+#dropdown-ingredients-clear:hover,
+#dropdown-appliance-clear:hover,
+#dropdown-ustensils-clear:hover {
+    color: #1B1B1B;
+}
+
+
 .dropdown-ingredients-inputcontainer,
 .dropdown-appliance-inputcontainer,
 .dropdown-ustensils-inputcontainer {
@@ -466,7 +483,6 @@ body {
     border-radius: 2px;
     border: 1px solid #C6C6C6;
     margin-left: 16px;
-    margin-bottom: 11px;
     background: #FFF;
     display: flex;
     align-items: center;
@@ -505,6 +521,7 @@ body {
     z-index: 10;
     background: #FFF;
     row-gap: 13px;
+    padding: 10px 0;
 }
 
 .dropdown-ingredients-list p,
@@ -575,6 +592,10 @@ body {
     height: 53px;
     text-transform: capitalize;
 
+}
+
+.selected-item:hover {
+    cursor: pointer;
 }
 
 .selected {
