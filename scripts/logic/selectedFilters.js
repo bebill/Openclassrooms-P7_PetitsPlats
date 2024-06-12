@@ -17,35 +17,6 @@ function selectItem(selectedElement) {
     updateSelectedVisuals();
 }
 
-function removeSelectedItem(selectedElement, selectedItemClone) {
-    const filterValue = selectedElement.textContent.trim().toLowerCase();
-
-    const index = selectedFilters.indexOf(filterValue);
-    if (index !== -1) {
-        selectedFilters.splice(index, 1);
-    }
-
-    selectedElement.classList.remove("selected");
-    selectedElement.style.height = "";
-    selectedElement.querySelector('svg')?.remove();
-
-    if (document.body.contains(selectedItemClone)) {
-        selectedItemClone.querySelector('svg')?.remove();
-        selectedItemClone.remove();
-    }
-
-    if (selectedFilters.length === 0) {
-        resetPageState();
-    } else {
-        searchByFilters(selectedFilters);
-    }
-
-    moveSelectedItemToTheTop(dropdownIngredientsListContainer);
-    moveSelectedItemToTheTop(dropdownApplianceListContainer);
-    moveSelectedItemToTheTop(dropdownUstensilsListContainer);
-    updateSelectedVisuals();
-}
-
 
 function updateSelectedItemLayout(selectedElement) {
     const filterValue = selectedElement.textContent.trim().toLowerCase();
@@ -162,8 +133,6 @@ function resetPageState() {
 function moveSelectedItemToTheTop(container) {
     const selectedItems = Array.from(container.children).filter(item => item.classList.contains('selected'));
     const unselectedItems = Array.from(container.children).filter(item => !item.classList.contains('selected'));
-    console.log("Selected Items move to top:", selectedItems);
-    console.log("Unselected Items move to top:", unselectedItems);
     // Effacer les éléments existants
     container.innerHTML = '';
 
@@ -179,14 +148,10 @@ function updateSelectedVisuals() {
 
     containers.forEach(container => {
         const allSelectedItems = container.querySelectorAll('[class*="selected"]');
-        console.log('Selected items:', allSelectedItems);
         allSelectedItems.forEach(selectedItem => {
             const filterValue = selectedItem.getAttribute('data-filter');
             const selectedItemText = selectedItem.textContent.trim().toLowerCase();
-            console.log('Filter value:', filterValue);
-            console.log('Selected item text:', selectedItemText);
             if (!selectedFilters.includes(filterValue) && !selectedFilters.includes(selectedItemText)) {
-                console.log('Removing item:', selectedItem);
                 removeSelectedItem(selectedItem, null, null);
             }
         });
