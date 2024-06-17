@@ -1,3 +1,15 @@
+/**
+ * Represents a recipe card with details about a specific recipe.
+ * @class
+ * @param {Object} recipeObject - The object containing recipe details.
+ * @param {string} recipeObject.name - The name of the recipe.
+ * @param {Array} recipeObject.ingredients - The list of ingredients for the recipe.
+ * @param {number} recipeObject.servings - The number of servings the recipe yields.
+ * @param {string} recipeObject.image - The path to the image associated with the recipe.
+ * @param {string} recipeObject.id - The unique identifier of the recipe.
+ * @param {number} recipeObject.time - The time required to prepare the recipe in minutes.
+ * @param {string} recipeObject.description - The description or instructions for the recipe.
+ */
 export class recipeCard {
     constructor(recipeObject) {
         const { name, ingredients, servings, image, id, time, description } =
@@ -10,6 +22,11 @@ export class recipeCard {
         this.time = time;
         this.description = description;
     }
+
+    /**
+     * Generates and returns the DOM structure representing the recipe card.
+     * @returns {HTMLDivElement} - The HTML structure representing the recipe card.
+     */
     getRecipeCardDOM() {
         const card = document.createElement('div');
         card.classList.add('recipe_container');

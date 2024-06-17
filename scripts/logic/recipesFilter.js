@@ -3,6 +3,9 @@ import { store } from "../utils/store.js";
 import { recipeCard } from "../templates/card.js";
 import { dropdown } from "./dropdown.js";
 
+/**
+ * Filters recipes based on search criteria and selected filters, then updates the displayed recipe cards.
+ */
 export function recipesFilter() {
   const cardsContainer = document.getElementById("cards_container");
 
@@ -11,12 +14,14 @@ export function recipesFilter() {
   const selectedAppliances = store.selectedAppliances;
   const selectedUstensils = store.selectedUstensils;
 
+  // Filtering recipes based on search bar value and selected filters
   const filteredRecipes = recipes.filter((recipe) => {
     const hasSearchbarValue = searchbarValue.length >= 3;
     const hasIngredients = selectedIngredients.length > 0;
     const hasAppliances = selectedAppliances.length > 0;
     const hasUstensils = selectedUstensils.length > 0;
 
+    // Check if the recipe meets search bar value criteria
     const searchbarValueCondition = hasSearchbarValue
       ? recipe.name
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
@@ -29,6 +34,7 @@ export function recipesFilter() {
       recipe.ingredients.some((c) => c.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searchbarValue))
       : true;
 
+    //Check if the recipe contains all selected ingredients, appliances and ustensils
     const ingredientCondition = hasIngredients
       ? selectedIngredients.every((ingredient) =>
         recipe.ingredients.map((c) => c.ingredient).includes(ingredient)
@@ -64,8 +70,10 @@ export function recipesFilter() {
   </div>`;
   }
 
+  // Update the store with filtered recipes
   store.addRecipesStore(filteredRecipes);
 
+  // Render filtered recipe cards
   store.recipesStore.forEach((recipe) => {
     const card = new recipeCard(recipe);
     const recipeContent = card.getRecipeCardDOM();
@@ -77,6 +85,9 @@ export function recipesFilter() {
   updateRecipesCount();
 }
 
+/**
+ * Updates the displayed count of recipes based on the current filter settings.
+ */
 function updateRecipesCount() {
   const recipeCountElement = document.getElementById("total_recipes_number");
   const numberOfRecipes = store.recipesStore.length;

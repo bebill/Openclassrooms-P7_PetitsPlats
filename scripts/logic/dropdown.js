@@ -14,6 +14,10 @@ const dropdownMenuAppliances = document.getElementById("dropdown_menu_appliances
 const dropdownMenuUstensils = document.getElementById("dropdown_menu_ustensils_list");
 const tagsContainer = document.getElementById("tags_container");
 
+/**
+ * Updates the dropdown menus for ingredients, appliances, and ustensils based on filtered recipes.
+ * Manages the search functionality within each dropdown menu.
+ */
 export function dropdown() {
 
   const ingredients = store.recipesStore.reduce((acc, recipe) => {
@@ -43,10 +47,12 @@ export function dropdown() {
 
 
 
-  // Trier les listes par ordre alphabétique
+  // Sort the lists alphabetically
   ingredients.sort((a, b) => a.localeCompare(b));
   appliances.sort((a, b) => a.localeCompare(b));
   ustensils.sort((a, b) => a.localeCompare(b));
+
+  // Clear previous dropdown menu content and populate them
 
   dropdownMenuIngredients.innerHTML = "";
 
@@ -81,6 +87,15 @@ export function dropdown() {
     });
   });
 
+  /**
+   * Functionalities for the dropdown search bar:
+   * - search clear icon display
+   * - normalize input to match with recipes
+   * - display error message
+   * - update dropdown menu with matching results
+   * - clear input and reset dropdown list
+   * - initialize search functionality for each dropdown menu
+   */
   function dropdownSearchbar(searchField, list, domElement, filterType) {
     const dropdownSearchClear = searchField.parentElement.getElementsByClassName("dropdown_search_clear")[0];
     const listContainer = domElement;
@@ -117,7 +132,6 @@ export function dropdown() {
       }
     });
 
-    // Clear input and reset dropdown list
     dropdownSearchClear.addEventListener("click", () => {
       searchField.value = "";
       dropdownSearchClear.style.display = "none";
