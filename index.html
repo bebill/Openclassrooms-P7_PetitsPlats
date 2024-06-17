@@ -2,131 +2,165 @@
 <html lang="fr">
 
 <head>
-    <link href="./styles.css" rel="stylesheet" type="text/css">
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Les Petits Plats</title>
     <meta name="description" content="Les Petits Plats - Trouvez vos recettes de cuisine">
     <meta name="author" content="Les Petits Plats">
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap" rel="stylesheet">
-    <!-- <script src="https://kit.fontawesome.com/f4ea6028b2.js" crossorigin="anonymous" defer></script> -->
-
 </head>
 
 <body>
     <header>
-        <div id="container-header">
-            <img id="background-img" src="./images/Background.png" alt="background" height="667" width="1440">
-            <img class="logo-img" src="./images/Logo.png" alt="logo" height="40" width="328">
-            <div class="header-content">
-                <div class="main-heading">CHERCHEZ PARMI PLUS DE 1500 RECETTES<br>
-                    DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES</div>
-                <div class="container-search">
-                    <div class="research-field">
-                        <input id="search-input" type="text" placeholder="Rechercher une recette, un ingrédient, ...">
-                        <svg id="search-close" xmlns="http://www.w3.org/2000/svg" width="17" height="17"
-                            viewBox="0 0 17 17" fill="none">
-                            <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#7A7A7A"
-                                stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                        <div class="search-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29"
-                                fill="none">
-                                <circle cx="10" cy="10.4219" r="9.5" stroke="white" />
-                                <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
+      <div id="container_header">
+        <img id="background_image" src="./images/Background.png" alt="background" height="667" width="1440">
+        <img id="logo_image" src="./images/Logo.png" alt="logo" height="40" width="328">
+        <div class="header_content">
+          <h1 class="main_heading">
+            CHERCHEZ PARMI PLUS DE 1500 RECETTES <br>
+            DU QUOTIDIEN,SIMPLES ET DÉLICIEUSES
+          </h1>
+          <div class="container_search">
+            <form id="main_search_bar" class="main_search_bar" role="search">
+              <input id="main_search_bar_input" class="search_input" type="search" placeholder="Rechercher une recette, un ingrédient, ..." aria-label="Search">
+              <svg id="clear_main_search_bar" class="search_clear" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17" fill="none">
+                <path d="M15 15L8.5 8.5M8.5 8.5L2 2M8.5 8.5L15 2M8.5 8.5L2 15" stroke="#7A7A7A" stroke-width="2.16667" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <button title="Submit Search" id="submit_search" class="search_icon" type="submit">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="29" viewBox="0 0 28 29" fill="none">
+                  <circle cx="10" cy="10.4219" r="9.5" stroke="white" />
+                  <line x1="18.3536" y1="19.0683" x2="27.3536" y2="28.0683" stroke="white" />
+                </svg>
+              </button>
+            </form>
+          </div>
         </div>
+      </div>
     </header>
-    <section class="dropdown-container">
-        <div class="dropdowns">
-            <div id="dropdown-ingredients">
-                <div id="dropdown-ingredients-visiblepart">
-                    <label for="dropdown-ingredients-input">Ingrédients</label>
-                    <svg id="dropdown-ingredients-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8"
-                        fill="none">
-                        <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="dropdown-ingredients-inputcontainer">
-                    <input type="text" class="dropdown-ingredients-input" tabindex="-1" id="dropdown-ingredients-input">
-                    <svg class="glass-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 14 14" fill="none">
-                        <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
-                        <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
-                    </svg>
-                    <button id="dropdown-ingredients-clear" aria-label="Effacer la recherche">×</button>
-                </div>
-                <div class="dropdown-ingredients-list" id="dropdown-ingredients-list">
-                </div>
-            </div>
-            <div id="dropdown-appliance">
-                <div id="dropdown-appliance-visiblepart">
-                    <label for="dropdown-appliance-input">Appareils</label>
-                    <svg id="dropdown-appliance-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8"
-                        fill="none">
-                        <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="dropdown-appliance-inputcontainer">
-                    <input type="text" class="dropdown-appliance-input" tabindex="-1" id="dropdown-appliance-input">
-                    <svg class="glass-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 14 14" fill="none">
-                        <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
-                        <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
-                    </svg>
-                    <button id="dropdown-appliance-clear" aria-label="Effacer la recherche">×</button>
-                </div>
-                <div class="dropdown-appliance-list" id="dropdown-appliance-list">
-                </div>
-            </div>
-            <div id="dropdown-ustensils">
-                <div id="dropdown-ustensils-visiblepart">
-                    <label for="dropdown-ustensils-input">Ustensiles</label>
-                    <svg id="dropdown-ustensils-arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8"
-                        fill="none">
-                        <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
-                    </svg>
-                </div>
-                <div class="dropdown-ustensils-inputcontainer">
-                    <input type="text" class="dropdown-ustensils-input" tabindex="-1" id="dropdown-ustensils-input">
-                    <svg class="glass-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-                        viewBox="0 0 14 14" fill="none">
-                        <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
-                        <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
-                    </svg>
-                    <button id="dropdown-ustensils-clear" aria-label="Effacer la recherche">×</button>
-                </div>
-                <div class="dropdown-ustensils-list" id="dropdown-ustensils-list">
-                </div>
-            </div>
-        </div>
-        <div class="number-container">
-            <p id="number-recipes"></p>
-        </div>
-    </section>
-    <div class="filters-selected" id="selectedContainer">
-    </div>
-    <section class="cards-container" id="cards-container">
-    </section>
 
-    <script src="./scripts/globals/common.js"></script>
-    <script src="./scripts/globals/utils.js"></script>
-    <script src="./scripts/components/header.js"></script>
-    <script src="./scripts/data/recipes.js"></script>
-    <script src="./scripts/logic/populateCards.js"></script>
-    <script src="./scripts/components/ingredientsList.js"></script>
-    <script src="./scripts/components/applianceList.js"></script>
-    <script src="./scripts/components/ustensilsList.js"></script>
-    <script src="./scripts/components/dropdown.js"></script>
-    <script src="./scripts/logic/selectedFilters.js"></script>
-    <script src="./scripts/logic/mainSearch.js"></script>
+    <main>
+      <section class="dropdowns_container">
+        <ul class="dropdowns">
+          <li class="dropdown">
+            <div id="dropdown_ingredients">
+              <div class="dropdown_visible_part">
+                <button class="dropdown_toggle" type="button" aria-expanded="false">
+                  Ingrédients
+                </button>
+                <svg class="dropdown_toggle_icon" id="dropdown_ingredients_arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
+                  <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
+                </svg>
+              </div>
+              <ul class="dropdown_menu" id="dropdown_menu_ingredients">
+                <li>
+                  <form class="dropdown_input_container" role="search">
+                    <input
+                      class="dropdown_search"
+                      id="search_ingredient"
+                      type="search"
+                      aria-label="Ingredients Dropdown Search"
+                    >
+                    <svg class="glass_icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                        viewBox="0 0 14 14" fill="none">
+                        <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                        <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+                    </svg>
+                    <button type="reset" class="dropdown_search_clear" id="dropdown_ingredients_clear" aria-label="Clear ingredients dropdown search">×</button>
+                  </form>
+                </li>
+                <li>
+                </li>
+                <li class="dropdown_items_list" id="dropdown_menu_ingredients_list"></li>
+              </ul>
+            </div>
+          </li>
+          
+          <li class="dropdown">
+            <div id="dropdown_appliances">
+              <div class="dropdown_visible_part">
+                <button class="dropdown_toggle" type="button" aria-expanded="false">
+                  Appareils
+                </button>
+                <svg class="dropdown_toggle_icon" id="dropdown_appliances_arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
+                  <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
+                </svg>
+              </div>
+              <ul class="dropdown_menu" id="dropdown_menu_appliances">
+                <li>
+                  <form class="dropdown_input_container" role="search">
+                    <input
+                      class="dropdown_search"
+                      id="search_appliance"
+                      type="search"
+                      aria-label="Appliances Dropdown Search"
+                    >
+                    <svg class="glass_icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                    viewBox="0 0 14 14" fill="none">
+                    <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                    <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+                </svg>
+                <button type="reset" class="dropdown_search_clear" id="dropdown_appliances_clear" aria-label="Clear appliances dropdown search">×</button>
+                  </form>
+                </li>
+                <li>
+                </li>
+                <li class="dropdown_items_list" id="dropdown_menu_appliances_list"></li>
+              </ul>
+            </div>
+          </li>
 
-</body>
+          <li class="dropdown">
+            <div id="dropdown_ustensils">
+              <div class="dropdown_visible_part">
+                <button class="dropdown_toggle" type="button" aria-expanded="false">
+                  Ustensiles
+                </button>
+                <svg class="dropdown_toggle_icon" id="dropdown_ustensils_arrow" xmlns="http://www.w3.org/2000/svg" width="15" height="8" viewBox="0 0 15 8" fill="none">
+                  <path d="M1 1L7.5 7L14 1" stroke="#1B1B1B" stroke-linecap="round" />
+                </svg>
+              </div>
+              <ul class="dropdown_menu" id="dropdown_menu_ustensils">
+                <li>
+                  <form class="dropdown_input_container" role="search">
+                    <input
+                      class="dropdown_search"
+                      id="search_ustensil"
+                      type="search"
+                      aria-label="Ustensils Dropdown Search"
+                    >
+                    <svg class="glass_icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14"
+                    viewBox="0 0 14 14" fill="none">
+                    <circle cx="5" cy="5" r="4.75" stroke="#7A7A7A" stroke-width="0.5" />
+                    <line x1="9.17678" y1="9.32322" x2="13.6768" y2="13.8232" stroke="#7A7A7A" stroke-width="0.5" />
+                </svg>
+                <button type="reset" class="dropdown_search_clear" id="dropdown_ustensils_clear" aria-label="Clear ustensils dropdown search">×</button>
+                  </form>
+                </li>
+                <li>
+                </li>
+                <li class="dropdown_items_list" id="dropdown_menu_ustensils_list"></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+
+        <div id="total_recipes_container" class="total_recipes_container">
+          <h2 id="total_recipes_number" class="total_recipes">50 recettes</h2>
+        </div>
+      </section>
+      <section id="tags_container" class="tags_container">
+        <h2 class="display_none">Tags Container</h2>
+      </section>
+      <section id="cards_container" class="cards_container">
+        <h2 class="display_none">Cards Container</h2>
+      </section>
+    </main>
+
+    <script type="module" src="./scripts/index.js"></script>
+  </body>
 
 </html>

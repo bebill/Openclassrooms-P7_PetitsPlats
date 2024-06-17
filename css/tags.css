@@ -1,0 +1,27 @@
+
+.selected_item {
+    display: inline-flex;
+    padding: 17px 18px;
+    align-items: center;
+    gap: 60px;
+    border-radius: 10px;
+    background-color: #FFD15B;
+    color: #000000;
+    font-size: 14px;
+    line-height: normal;
+    height: 53px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+  
+.selected_item.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+  
+.selected_item.hide {
+    opacity: 0;
+    transform: translateY(-20px);
+    pointer-events: none;
+}
