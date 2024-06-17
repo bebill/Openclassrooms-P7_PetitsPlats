@@ -73,7 +73,7 @@ export function recipesFilter() {
   // Update the store with filtered recipes
   store.addRecipesStore(filteredRecipes);
 
-  // Render filtered recipe cards
+  // Render filtered recipe cards TEST Array.prototype.forEach()
   store.recipesStore.forEach((recipe) => {
     const card = new recipeCard(recipe);
     const recipeContent = card.getRecipeCardDOM();
