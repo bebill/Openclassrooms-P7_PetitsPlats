@@ -1,3 +1,6 @@
+.tags_container {
+    padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
+}
 
 .selected_item {
     display: inline-flex;
