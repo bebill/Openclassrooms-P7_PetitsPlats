@@ -8,7 +8,6 @@ export const FILTER_DICT = [
   "selectedUstensils",
 ];
 
-
 const dropdownMenuIngredients = document.getElementById("dropdown_menu_ingredients_list");
 const dropdownMenuAppliances = document.getElementById("dropdown_menu_appliances_list");
 const dropdownMenuUstensils = document.getElementById("dropdown_menu_ustensils_list");
@@ -171,7 +170,3 @@ export function dropdown() {
     "selectedUstensils"
   );
 }
-
-
-
-

@@ -99,7 +99,3 @@ function updateRecipesCount() {
   }
   recipeCountElement.textContent = numberOfRecipes === 0 ? recipeText : `${numberOfRecipes} ${recipeText}`;
 }
-
-
-
-
