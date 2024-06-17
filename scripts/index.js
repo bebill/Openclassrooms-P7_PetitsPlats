@@ -23,6 +23,7 @@ recipes.forEach((recipe) => {
 const searchbarInput = document.getElementById("main_search_bar_input");
 const searchClose = document.getElementById("clear_main_search_bar");
 const form = document.getElementById("main_search_bar");
+const dropdownSearchInputs = document.getElementsByClassName('dropdown_search');
 
 form.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -50,9 +51,6 @@ searchClose.addEventListener("click", function () {
 
 document.addEventListener('DOMContentLoaded', setContainerHeight);
 window.addEventListener('resize', setContainerHeight);
-
-// Effacer le contenu des inputs de recherche lors du rechargement de la page
-const dropdownSearchInputs = document.getElementsByClassName('dropdown_search');
 window.addEventListener('load', function () {
     searchbarInput.value = "";
     for (let i = 0; i < dropdownSearchInputs.length; i++) {
