@@ -10,6 +10,10 @@ let recipeObject = {};
 
 const cardsContainer = document.getElementById("cards_container");
 
+/**
+ * Iterates through recipes data and renders recipe cards in the DOM.
+ * @param {Array<Object>} recipes - Array of recipe objects.
+ */
 recipes.forEach((recipe) => {
     recipeObject = recipe;
 
@@ -25,15 +29,25 @@ const searchClose = document.getElementById("clear_main_search_bar");
 const form = document.getElementById("main_search_bar");
 const dropdownSearchInputs = document.getElementsByClassName('dropdown_search');
 
+/**
+ * Prevents the default form submission behavior for the main search bar form.
+ * @param {Event} event - The submit event.
+ */
 form.addEventListener("submit", function (event) {
     event.preventDefault();
 });
 validSearchField(searchbarInput, recipes);
 
+/**
+ * Initializes the dropdown functionality for ingredients, appliances, and utensils filters.
+ */
 dropdown();
 
 
-// reset the main search bar input 
+/**
+ * Shows or hides the clear button in the main search bar based on input value.
+ * Clears the main search bar input and triggers recipes filter on click.
+ */
 searchbarInput.addEventListener("input", function () {
     if (searchbarInput.value) {
         searchClose.style.display = "block";
@@ -49,6 +63,10 @@ searchClose.addEventListener("click", function () {
     recipesFilter();
 });
 
+/**
+ * Sets the container height on DOM content load and window resize.
+ * Clears the search inputs of dropdowns on page load.
+ */
 document.addEventListener('DOMContentLoaded', setContainerHeight);
 window.addEventListener('resize', setContainerHeight);
 window.addEventListener('load', function () {
