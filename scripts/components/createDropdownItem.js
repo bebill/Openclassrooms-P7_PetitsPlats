@@ -165,7 +165,7 @@ export function moveSelectedItemToTop(menu) {
  * Dropdown open/close animation  
  */
 document.addEventListener('DOMContentLoaded', () => {
-    const dropdownToggles = document.getElementsByClassName('dropdown_toggle');
+    const dropdownToggles = document.getElementsByClassName('dropdown_visible_part');
 
     Array.from(dropdownToggles).forEach(toggle => {
         const dropdown = toggle.closest('.dropdown');
