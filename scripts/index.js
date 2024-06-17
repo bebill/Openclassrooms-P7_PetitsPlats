@@ -21,3 +21,6 @@ recipes.forEach((recipe) => {
 });
 
 dropdown();
+
+document.addEventListener('DOMContentLoaded', setContainerHeight);
+window.addEventListener('resize', setContainerHeight);
