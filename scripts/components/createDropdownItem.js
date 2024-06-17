@@ -5,7 +5,9 @@ import { recipesFilter } from "../logic/recipesFilter.js";
 import { deactivateItem } from "./removeDropdownItem.js";
 
 
-// Create remove icon to display when item is selected in the list
+/**
+ * Create remove icon to display when item is selected in the list
+ */
 const removeActiveItemIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
 removeActiveItemIcon.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 removeActiveItemIcon.setAttribute('width', '17');
@@ -25,6 +27,16 @@ removeActiveItemIcon.appendChild(circleElement);
 removeActiveItemIcon.appendChild(pathElement);
 removeActiveItemIcon.setAttribute("id", "remove_active_item_icon");
 
+/**
+ * Creates a dropdown menu item based on the provided item information.
+ * Handles activation, deactivation, and selection of items in the dropdown.
+ * 
+ * @param {object} options - The options object containing item, menu, container, and filterType.
+ * @param {string} options.item - The item to create in the dropdown menu.
+ * @param {HTMLElement} options.menu - The dropdown menu element.
+ * @param {HTMLElement} options.container - The container element holding selected items.
+ * @param {string} options.filterType - The type of filter associated with the item.
+ */
 export function createDropdownItem({ item, menu, container, filterType }) {
     const li = document.createElement("li");
     li.classList.add("dropdown_item");
@@ -45,7 +57,7 @@ export function createDropdownItem({ item, menu, container, filterType }) {
         });
     }
 
-    // Vérifier si l'élément a déjà été sélectionné
+    // Check if the item is already selected
     const isAlreadySelected = Array.from(container.children).some((child) => {
         return child.textContent.trim() === item;
     });
@@ -56,12 +68,12 @@ export function createDropdownItem({ item, menu, container, filterType }) {
 
     li.addEventListener("click", function () {
 
-        // Prevent active item to be selected again
+        // Prevent selecting the active item again
         if (li.classList.contains("active")) {
             return;
         }
 
-        // Reset dropdown input field
+        // Reset dropdown search fields
         const searchFields = document.getElementsByClassName("dropdown_search");
         Array.from(searchFields).forEach((searchField) => {
             searchField.value = "";
@@ -133,7 +145,25 @@ export function createDropdownItem({ item, menu, container, filterType }) {
     menu.appendChild(li);
 }
 
-// Dropdown open/close animation
+/**
+ * Moves the active items to the top of the dropdown menu.
+ * 
+ * @param {HTMLElement} menu - The dropdown menu element.
+ */
+export function moveSelectedItemToTop(menu) {
+    const items = Array.from(menu.children);
+    const activeItems = items.filter(item => item.classList.contains('active'));
+    const inactiveItems = items.filter(item => !item.classList.contains('active'));
+
+    menu.innerHTML = '';
+
+    activeItems.forEach(item => menu.appendChild(item));
+    inactiveItems.forEach(item => menu.appendChild(item));
+}
+
+/**
+ * Dropdown open/close animation  
+ */
 document.addEventListener('DOMContentLoaded', () => {
     const dropdownToggles = document.getElementsByClassName('dropdown_toggle');
 
@@ -158,15 +188,3 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
-
-
-export function moveSelectedItemToTop(menu) {
-    const items = Array.from(menu.children);
-    const activeItems = items.filter(item => item.classList.contains('active'));
-    const inactiveItems = items.filter(item => !item.classList.contains('active'));
-
-    menu.innerHTML = '';
-
-    activeItems.forEach(item => menu.appendChild(item));
-    inactiveItems.forEach(item => menu.appendChild(item));
-}
