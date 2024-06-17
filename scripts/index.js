@@ -3,7 +3,7 @@ import { recipeCard } from "./templates/card.js";
 import { setContainerHeight } from "./templates/header.js";
 import { dropdown } from "./logic/dropdown.js";
 import { validSearchField } from "./logic/validSearch.js";
-import { recipesFilterWithLoops } from "./logic/recipesFilter.js";
+import { recipesFilterWithArrayMethods } from "./logic/recipesFilter.js";
 import { store } from "./utils/store.js";
 
 let recipeObject = {};
@@ -60,7 +60,7 @@ searchClose.addEventListener("click", function () {
     searchbarInput.value = "";
     searchClose.style.display = "none";
     store.searchbarValue = "";
-    recipesFilterWithLoops();
+    recipesFilterWithArrayMethods();
 });
 
 /**

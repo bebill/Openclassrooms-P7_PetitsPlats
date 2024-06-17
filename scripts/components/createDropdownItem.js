@@ -1,7 +1,7 @@
 import { recipes } from "../data/recipes.js";
 import { store } from "../utils/store.js";
 import { FILTER_DICT } from "../logic/dropdown.js";
-import { recipesFilterWithLoops } from "../logic/recipesFilter.js";
+import { recipesFilterWithArrayMethods } from "../logic/recipesFilter.js";
 import { deactivateItem } from "./removeDropdownItem.js";
 
 
@@ -115,7 +115,7 @@ export function createDropdownItem({ item, menu, container, filterType }) {
 
             FILTER_DICT.includes(filterType) && store.deleteFilter(filterType, item);
             store.addRecipesStore(recipes);
-            recipesFilterWithLoops();
+            recipesFilterWithArrayMethods();
 
             const dropdownItems = Array.from(menu.getElementsByClassName('dropdown_item'));
             dropdownItems.forEach((dropdownItem) => {
@@ -136,7 +136,7 @@ export function createDropdownItem({ item, menu, container, filterType }) {
         container.appendChild(selectedItem);
 
         FILTER_DICT.includes(filterType) && store.addFilter(filterType, item);
-        recipesFilterWithLoops();
+        recipesFilterWithArrayMethods();
         activateItem();
         moveSelectedItemToTop(menu);
     });

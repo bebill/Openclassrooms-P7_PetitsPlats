@@ -1,5 +1,5 @@
 import { store } from "../utils/store.js";
-import { recipesFilterWithLoops } from "./recipesFilter.js";
+import { recipesFilterWithArrayMethods } from "./recipesFilter.js";
 
 /**
  * Checks if a given string matches the criteria for a valid search tag.
@@ -30,6 +30,6 @@ export function validSearchField(searchField, searchList) {
     store.addSearchValue(currentSearch);
 
     // Trigger recipes filtering based on the updated search value
-    recipesFilterWithLoops();
+    recipesFilterWithArrayMethods();
   });
 }
