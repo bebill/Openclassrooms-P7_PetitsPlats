@@ -1,7 +1,7 @@
 import { recipes } from "../data/recipes.js";
 import { store } from "../utils/store.js";
 import { FILTER_DICT } from "../logic/dropdown.js";
-import { recipesFilter } from "../logic/recipesFilter.js";
+import { recipesFilterWithLoops } from "../logic/recipesFilter.js";
 import { deactivateItem } from "./removeDropdownItem.js";
 
 
@@ -115,7 +115,7 @@ export function createDropdownItem({ item, menu, container, filterType }) {
 
             FILTER_DICT.includes(filterType) && store.deleteFilter(filterType, item);
             store.addRecipesStore(recipes);
-            recipesFilter();
+            recipesFilterWithLoops();
 
             const dropdownItems = Array.from(menu.getElementsByClassName('dropdown_item'));
             dropdownItems.forEach((dropdownItem) => {
@@ -136,7 +136,7 @@ export function createDropdownItem({ item, menu, container, filterType }) {
         container.appendChild(selectedItem);
 
         FILTER_DICT.includes(filterType) && store.addFilter(filterType, item);
-        recipesFilter();
+        recipesFilterWithLoops();
         activateItem();
         moveSelectedItemToTop(menu);
     });
@@ -188,3 +188,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+

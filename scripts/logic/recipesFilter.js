@@ -6,7 +6,7 @@ import { dropdown } from "./dropdown.js";
 /**
  * Filters recipes based on search criteria and selected filters, then updates the displayed recipe cards.
  */
-export function recipesFilter() {
+export function recipesFilterWithLoops() {
   const cardsContainer = document.getElementById("cards_container");
 
   const searchbarValue = store.searchbarValue;
@@ -14,52 +14,77 @@ export function recipesFilter() {
   const selectedAppliances = store.selectedAppliances;
   const selectedUstensils = store.selectedUstensils;
 
-  // Filtering recipes based on search bar value and selected filters
-  const filteredRecipes = recipes.filter((recipe) => {
-    const hasSearchbarValue = searchbarValue.length >= 3;
-    const hasIngredients = selectedIngredients.length > 0;
-    const hasAppliances = selectedAppliances.length > 0;
-    const hasUstensils = selectedUstensils.length > 0;
+  const filteredRecipes = [];
+  const hasSearchbarValue = searchbarValue.length >= 3;
 
-    // Check if the recipe meets search bar value criteria
-    const searchbarValueCondition = hasSearchbarValue
-      ? recipe.name
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
+    let searchbarValueCondition = true;
+
+    if (hasSearchbarValue) {
+      const normalizedSearchValue = searchbarValue
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase()
-        .includes(searchbarValue.toLocaleLowerCase()) ||
-      recipe.description
+        .toLocaleLowerCase();
+      const recipeName = recipe.name
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase()
-        .includes(searchbarValue.toLocaleLowerCase()) ||
-      recipe.ingredients.some((c) => c.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searchbarValue))
-      : true;
+        .toLocaleLowerCase();
+      const recipeDescription = recipe.description
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLocaleLowerCase();
 
-    //Check if the recipe contains all selected ingredients, appliances and ustensils
-    const ingredientCondition = hasIngredients
-      ? selectedIngredients.every((ingredient) =>
-        recipe.ingredients.map((c) => c.ingredient).includes(ingredient)
-      )
-      : true;
+      let ingredientFound = false;
+      for (let j = 0; j < recipe.ingredients.length; j++) {
+        const ingredient = recipe.ingredients[j].ingredient
+          .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .toLocaleLowerCase();
+        if (ingredient.includes(normalizedSearchValue)) {
+          ingredientFound = true;
+          break;
+        }
+      }
 
-    const applianceCondition = hasAppliances
-      ? selectedAppliances.every((appliance) =>
-        recipe.appliance.includes(appliance)
-      )
-      : true;
+      searchbarValueCondition = recipeName.includes(normalizedSearchValue) ||
+        recipeDescription.includes(normalizedSearchValue) ||
+        ingredientFound;
+    }
 
-    const utensilCondition = hasUstensils
-      ? selectedUstensils.every((ustensil) =>
-        recipe.ustensils.includes(ustensil)
-      )
-      : true;
+    let ingredientCondition = true;
+    if (selectedIngredients.length > 0) {
+      for (let j = 0; j < selectedIngredients.length; j++) {
+        const ingredient = selectedIngredients[j];
+        if (!recipe.ingredients.some((c) => c.ingredient === ingredient)) {
+          ingredientCondition = false;
+          break;
+        }
+      }
+    }
 
-    return (
-      searchbarValueCondition &&
-      ingredientCondition &&
-      applianceCondition &&
-      utensilCondition
-    );
-  });
+    let applianceCondition = true;
+    if (selectedAppliances.length > 0) {
+      for (let j = 0; j < selectedAppliances.length; j++) {
+        const appliance = selectedAppliances[j];
+        if (!recipe.appliance.includes(appliance)) {
+          applianceCondition = false;
+          break;
+        }
+      }
+    }
+
+    let utensilCondition = true;
+    if (selectedUstensils.length > 0) {
+      for (let j = 0; j < selectedUstensils.length; j++) {
+        const utensil = selectedUstensils[j];
+        if (!recipe.ustensils.includes(utensil)) {
+          utensilCondition = false;
+          break;
+        }
+      }
+    }
+
+    if (searchbarValueCondition && ingredientCondition && applianceCondition && utensilCondition) {
+      filteredRecipes.push(recipe);
+    }
+  }
 
   cardsContainer.innerHTML = "";
 
@@ -74,13 +99,12 @@ export function recipesFilter() {
   store.addRecipesStore(filteredRecipes);
 
   // Render filtered recipe cards
-  store.recipesStore.forEach((recipe) => {
-    const card = new recipeCard(recipe);
+  for (let i = 0; i < store.recipesStore.length; i++) {
+    const card = new recipeCard(store.recipesStore[i]);
     const recipeContent = card.getRecipeCardDOM();
-
     cardsContainer.appendChild(recipeContent);
     dropdown();
-  });
+  }
 
   updateRecipesCount();
 }
@@ -100,3 +124,7 @@ function updateRecipesCount() {
   }
   recipeCountElement.textContent = numberOfRecipes === 0 ? recipeText : `${numberOfRecipes} ${recipeText}`;
 }
+
+
+
+

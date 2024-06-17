@@ -1,7 +1,7 @@
 import { recipes } from "../data/recipes.js";
 import { store } from "../utils/store.js";
 import { FILTER_DICT } from "../logic/dropdown.js";
-import { recipesFilter } from "../logic/recipesFilter.js";
+import { recipesFilterWithLoops } from "../logic/recipesFilter.js";
 
 /**
  * Deactivates an item in the dropdown menu and removes it from the selected items list.
@@ -30,7 +30,7 @@ export function deactivateItem({ item, menu, container, filterType }) {
         // Delete the item from the store filter and update recipes
         FILTER_DICT.includes(filterType) && store.deleteFilter(filterType, item);
         store.addRecipesStore(recipes);
-        recipesFilter();
+        recipesFilterWithLoops();
 
         // Reset dropdown item state
         dropdownItem.classList.remove('active');
