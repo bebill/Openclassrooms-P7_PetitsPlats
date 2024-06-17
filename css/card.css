@@ -1,0 +1,131 @@
+.cards_container {
+  padding-top: 22px;
+  padding-left: clamp(7px, calc(3.5vw + 2px), 102px);
+  padding-right: clamp(7px, calc(3.5vw + 2px), 102px);
+  display: grid;
+  /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); */
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: clamp(7px, calc(4vw + 6px), 66px);
+  column-gap: clamp(7px, calc(3vw + 6px), 48px);
+  background: #EDEDED;
+}
+
+@media (max-width: 950px) {
+  .cards_container {
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+  
+}
+
+
+@media (max-width: 465px) {
+  .cards_container {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+}
+
+.recipes_card img {
+  object-fit: cover;
+  height: 253px;
+  width: 100%;
+  border-radius: 20px 20px 0 0;
+}
+
+.recipes_card {
+  border-radius: 21px;
+  background: #FFF;
+  box-shadow: 0px 4px 34px 30px rgba(0, 0, 0, 0.04);
+}
+
+.container_card_text {
+  width: 100%;
+  padding-left: 6.5%;
+  padding-right: 6.5%;
+  height: 480px;
+}
+
+
+.container_card_text h1 {
+  padding-top: 21px;
+  padding-bottom: 29px;
+  color: #000;
+  font-family: "Anton", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.container_card_text h2 {
+  color: #7A7A7A;
+  font-family: "Manrope";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 1.08px;
+  text-transform: uppercase;
+  padding-bottom: 15px;
+}
+
+.recipe_description {
+  color: #1B1B1B;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 85px;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
+
+.description_container {
+  margin-bottom: 28px;
+}
+
+.recipe_ingredients {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 21px;
+  padding-bottom: 61px;
+}
+
+.ingredient_name {
+  color: #1B1B1B;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.ingredient_quantity {
+  color: #7A7A7A;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.recipe_time {
+  display: inline-flex;
+  padding: 5px 15px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 14px;
+  background: #FFD15B;
+  position: absolute;
+  top: 21px;
+  right: 22px;
+}
+
+.recipe_container {
+  position: relative;
+}
+
