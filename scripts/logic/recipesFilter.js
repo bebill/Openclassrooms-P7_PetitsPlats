@@ -4,35 +4,21 @@ import { recipeCard } from "../templates/card.js";
 import { dropdown } from "./dropdown.js";
 
 /**
- * Filters recipes based on search criteria and selected filters, then updates the displayed recipe cards.
+ * Filters recipes based on selected filters, then updates the displayed recipe cards.
  */
 export function recipesFilter() {
   const cardsContainer = document.getElementById("cards_container");
 
-  const searchbarValue = store.searchbarValue;
   const selectedIngredients = store.selectedIngredients;
   const selectedAppliances = store.selectedAppliances;
   const selectedUstensils = store.selectedUstensils;
 
-  // Filtering recipes based on search bar value and selected filters
+  // Filtering recipes based on selected filters
   const filteredRecipes = recipes.filter((recipe) => {
-    const hasSearchbarValue = searchbarValue.length >= 3;
     const hasIngredients = selectedIngredients.length > 0;
     const hasAppliances = selectedAppliances.length > 0;
     const hasUstensils = selectedUstensils.length > 0;
 
-    // Check if the recipe meets search bar value criteria
-    const searchbarValueCondition = hasSearchbarValue
-      ? recipe.name
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase()
-        .includes(searchbarValue.toLocaleLowerCase()) ||
-      recipe.description
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase()
-        .includes(searchbarValue.toLocaleLowerCase()) ||
-      recipe.ingredients.some((c) => c.ingredient.normalize('NFD').replace(/[\u0300-\u036f]/g, '').includes(searchbarValue))
-      : true;
 
     //Check if the recipe contains all selected ingredients, appliances and ustensils
     const ingredientCondition = hasIngredients
@@ -54,7 +40,6 @@ export function recipesFilter() {
       : true;
 
     return (
-      searchbarValueCondition &&
       ingredientCondition &&
       applianceCondition &&
       utensilCondition
