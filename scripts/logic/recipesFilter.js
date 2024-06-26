@@ -25,27 +25,33 @@ export function recipesFilterWithLoops() {
       const normalizedSearchValue = searchbarValue
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .toLocaleLowerCase();
+
       const recipeName = recipe.name
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
         .toLocaleLowerCase();
-      const recipeDescription = recipe.description
-        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-        .toLocaleLowerCase();
 
-      let ingredientFound = false;
-      for (let j = 0; j < recipe.ingredients.length; j++) {
-        const ingredient = recipe.ingredients[j].ingredient
+      searchbarValueCondition = recipeName.includes(normalizedSearchValue)
+
+      if (!searchbarValueCondition) {
+        const recipeDescription = recipe.description
           .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
           .toLocaleLowerCase();
-        if (ingredient.includes(normalizedSearchValue)) {
-          ingredientFound = true;
-          break;
+
+        searchbarValueCondition = recipeDescription.includes(normalizedSearchValue)
+
+        if (!recipeDescription) {
+          for (let j = 0; j < recipe.ingredients.length; j++) {
+            const ingredient = recipe.ingredients[j].ingredient
+              .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+              .toLocaleLowerCase();
+
+            if (ingredient.includes(normalizedSearchValue)) {
+              searchbarValueCondition = true;
+              break;
+            }
+          }
         }
       }
-
-      searchbarValueCondition = recipeName.includes(normalizedSearchValue) ||
-        recipeDescription.includes(normalizedSearchValue) ||
-        ingredientFound;
     }
 
     let ingredientCondition = true;
